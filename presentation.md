@@ -14,7 +14,14 @@ Master's Thesis - July 2025
 
 ### Motivation and Overview
 
-- **Behavioural analysis** as key for cybersecurity and biomedical research
+- Initial goal: _Create framework for universal binary unpacking_
+  - why? to help researchers to understand malware better
+- Phase01: **Behavioural analysis** as key for cybersecurity and biomedical research
+
+--
+
+### Shift: static to dynamic analysis
+
 - Shift from static approaches towards dynamic runtime analysis
 - Goal: Create generalized behavioural models for diverse domains
 
@@ -34,6 +41,66 @@ Master's Thesis - July 2025
 - From raw execution traces to **Partial Control Flow Graphs (PFGs)**
 - Behaviour encoded as structured time series data
 
+--
+
+![](assets/images/proctracer-snapshot.png)
+
+--
+
+![](assets/images/flow.png)
+
+---
+
+### Dataset & Normalization
+
+- DFS traversals of PFG using queue
+- Queue size values yield on each node visit
+- Normalization PFG traversals lengths 500 with Haar Wavele
+
+<img src="assets/images/cfg-initial-datasets.png" alt="cfg-initial-datasets.png" width="60%" />
+
+--
+
+- 641 sample (115 GB)
+- 6 families of ransomware
+  - Akira
+  - Lockbit
+  - Avaddon
+  - Phobos
+  - Crysis
+  - Rhadamanthys
+- clean samples
+  - 18k for train
+  - 135k for test
+
+---
+
+### Malware Clustering with k-Means
+
+- Time series clustered using DTW Barycenter Averaging
+- 6 clusters discovered, aligned with AV families
+- Good separation observed
+
+<img src="assets/images/cfg-silhouette.png" alt="cfg-silhouette.png" width="50%" />
+
+--
+
+**k-Means with euclidean**
+
+![](assets/images/cfg-k-means-euclidian.png)
+
+--
+
+**k-Means with k-Shape**
+
+![](assets/images/cfg-k-means-kshape.png)
+
+--
+
+**k-Means with DBA**
+
+![](assets/images/cfg-k-means-dba.png)
+
 ---
 
 ### Malware Classification via CNN-LSTM
@@ -50,6 +117,16 @@ Master's Thesis - July 2025
 - Automated behavioural analysis necessity
 - Limitations of existing commercial and open-source solutions
 
+--
+
+### Dataset Composition
+
+- Two main datasets collected:
+  - **Zebrafish trials**: 95 video samples
+  - **Goldfish trials**: 80 video samples
+- Each trial consists of ~30–60 seconds of 3D movement
+- Unknown subjects: Healthy vs Sick vs Treated
+
 ---
 
 ### FARM Framework for Real-time Monitoring
@@ -58,13 +135,29 @@ Master's Thesis - July 2025
 - Real-time 2D/3D behavioural metrics
 - Simple, low-cost setup for reproducibility
 
+--
+
+![](assets/images/farm-segmentation.png)
+
+--
+
+![](assets/images/farm-trial01-heatmap.png)
+
+--
+
+![](assets/images/farm-trial01-tracking.png)
+
 ---
 
-### Behavioural Pattern Analysis in FARM
+#### Behavioural Pattern Analysis in FARM
 
-- Temporal and spatial feature extraction
-- Clustering (K-means, k-shape) and supervised classification (HMMs)
-- Framework tested in controlled lab settings
+- **Temporal and spatial features** extracted from 2D/3D motion data:
+  - Speed, direction, turning angles, acceleration
+- **Unsupervised clustering**:
+  - K-means for initial behavioural grouping
+  - K-shape for time-series clustering with shape-based distance
+- **Supervised classification**:
+  - Hidden Markov Models (HMMs) trained on clustered sequences
 
 --
 
@@ -82,31 +175,79 @@ Master's Thesis - July 2025
 
 **goldfish**
 
+--
+
+![](assets/images/kmeans-2d-zebra.png)
+
+---
+
+### Farm: 3D motion data
+
+<img src="assets/images/cubes-segmentation.png" alt="cubes-segmentation.png" width="60%" />
+
+--
+
+<img src="assets/images/plot-hmm-60-zebrafish.png" alt="plot-hmm-60-zebrafish.png" width="60%" />
+
+**hmm on 60/40 for zebrafish**
+
+--
+
+<img src="assets/images/plot-hmm-60-goldfish.png" alt="plot-hmm-60-goldfish.png" width="60%" />
+
+**hmm on 60/40 for goldfish**
+
+---
+
+### FARM System Results
+
+- **High clustering cohesion** observed using silhouette scores on K-means and K-shape clusters
+- **Accurate behaviour classification** using HMM:
+  - Precision and recall over 90% on labelled zebrafish data
+- **Cross-species applicability**:
+  - Successfully extended from zebrafish to goldfish trials
+
 ---
 
 ### Vision Transformers (ViT) for Medical Classification
 
-- ViT’s applicability in medical image analysis (colonoscopy)
-- Dataset: Colonoscopic images (CVC-ClinicDB, C3VD)
-- Benchmarking: 20 ViT variants compared on accuracy and performance
+- Target task: classify colonoscopy frames based on **Boston Bowel Preparation Scale (BBPS)**
+- Motivation:
+  - Frame-level predictions aid in automated quality assessment
+  - Supports real-time feedback during colonoscopy procedures
+- Dataset: Frame-labelled images from colonoscopic videos
 
 ---
 
-### Top ViT Models and Observations
+### ViT Dataset Characteristics
 
-- Best performing models (Tiny ViT 5M, ViT Small ResNet50d)
-- Practical insights on medical deployment
-- Trade-offs between accuracy, complexity, and speed
+- **CVC-ClinicDB**: Polyp and clean colonoscopy frames, 612 images
+- **C3VD**: More diverse content, multi-class setup
+- Frames annotated by clinicians based on BBPS scale
+- Distribution:
+  - Class imbalance addressed via stratified sampling and augmentation
 
---
+---
 
-| Model                        | Accuracy | F1 Score |
-|------------------------------|----------|----------|
-| Swin Tiny Patch4 Window7 224 | 90.48%   | 0.33     |
-| ViT Small ResNet50d S16 224  | 90.43%   | 0.46     |
-| Vitamin Small 224            | 90.42%   | 0.33     |
-| ViT Base MCI 224             | 90.40%   | 0.32     |
-| ConViT Base                  | 90.46%   | 0.33     |
+### Vision Transformer Models
+
+- 20 models benchmarked:
+  - MaxViT, SAMViT, ViT variants (Base, Tiny, RelPos), ConViT, MobileViT, etc.
+- All models trained with:
+  - Resolution: 224×224
+  - Optimizer: AdamW
+- Evaluated for:
+  - Accuracy
+  - Per-class F1-score
+  - AUC
+
+---
+
+### ViT Benchmarking Results
+
+- Best performing models clearly identified
+- Highest accuracy on multi-class colonoscopy dataset
+- Practical insights for model deployment
 
 ---
 
@@ -135,6 +276,16 @@ Master's Thesis - July 2025
 - FARM enhancements: broader species and behaviors
 - Fine-tuning ViTs and multimodal approaches
 - Explainability and interpretability in ML models
+
+--
+
+Acknowledgements
+
+- Faculty of Computer Science, Alexandru Ioan Cuza University
+
+- Institute of Computer Science, Romanian Academy, Iași Branch
+
+- Center of Biomedical Research, Romanian Academy, Iași Branch
 
 ---
 
