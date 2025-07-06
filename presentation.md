@@ -21,7 +21,11 @@ July 2025
   <div style="flex: 1;">
     <a href="#about-paper-farm">
       <img src="assets/images/paper-farm-2d.png" style="height: 33vh; border-radius: 6px;" />
-      <div style="font-size:0.8em; line-height: 1em;">Improving Automated Behaviour Analysis in Zebrafish Laboratory Trials</div>
+      <div style="font-size:0.8em; line-height: 1em;">
+        Improving Automated Behaviour Analysis in Zebrafish Laboratory Trials
+        <br />
+        <span style="color: #1976d2; font-size:0.75em; line-height: 0.75em;">Acta Physica Polonica A <br/><i>Springer</i></span>
+      </div>
     </a>
   </div>
 
@@ -29,7 +33,11 @@ July 2025
     <a href="#about-paper-farm">
       <img src="assets/images/paper-farm-3d.png" style="height: 33vh; border-radius: 6px;" />
       <div>
-      <div style="font-size:0.8em; line-height: 1em;">Clustering 3D Tracking in Zebrafish Laboratory Trials</div>
+      <div style="font-size:0.8em; line-height: 1em;">
+        Clustering 3D Tracking in Zebrafish Laboratory Trials
+        <br />
+        <span style="color: #1976d2; font-size:0.75em; line-height: 0.75em;">2024 E-Health and Bioengineering Conference <br/><i>IEEE</i></span>
+      </div>
       </div>
     </a>
   </div>
@@ -37,16 +45,50 @@ July 2025
   <div style="flex: 1;">
     <a href="#about-paper-cfg">
       <img src="assets/images/paper-cfg-dbi.png" style="height: 33vh; border-radius: 6px;" />
-      <div style="font-size:0.8em; line-height: 1em;">DBI-Assisted Behaviour Classification of Malicious Binary Applications</div>
+      <div style="font-size:0.8em; line-height: 1em;">
+        DBI-Assisted Behaviour Classification of Malicious Binary Applications
+        <br />
+        <span style="color: #1976d2; font-size:0.75em; line-height: 0.75em;">KES2025 <br /><i>Springer</i></span>
+      </div>
     </a>
   </div>
 
   <div style="flex: 1;">
     <a href="#about-paper-vit">
       <img src="assets/images/paper-vit.png" style="height: 33vh; border-radius: 6px;" />
-      <div style="font-size:0.8em; line-height: 1em;">Comparing Vision Transformers Towards Automatic Bowel  Cleansing: A discussion</div>
+      <div style="font-size:0.8em; line-height: 1em;">
+        Comparing Vision Transformers Towards Automatic Bowel  Cleansing: A discussion
+        <br />
+        <span style="color: #1976d2; font-size:0.75em; line-height: 0.75em;">KES2025 <br /><i>ELSEIVER</i></span>
+      </div>
     </a>
   </div>
+
+</div>
+
+--
+
+### Acknowledgements
+
+<div style="font-size:0.8em; line-height: 1em;">
+
+- POCU/993/6/13/153322
+  - Faculty of Computer Science, Alexandru Ioan Cuza University
+    - *Vlad Constantin Crăciun* [1,2,3,4]
+
+  - Institute of Computer Science, Romanian Academy, Iași Branch
+    - *Mihaela Luca* [1,2,4]
+    - Adrian Ciobanu [4]
+
+  - Center of Biomedical Research, Romanian Academy, Iași Branch
+    - Radu Marian Lefter [1,2,4]
+- Bitdefender
+  - *Vlad Constantin Craciun* [1,2,3,4]
+  - Mihai Leonte [3]
+- Institute of Gastroenterology and Hepatology, St Spiridon Hospital
+  - Vasile Liviu Drug [4]
+- Grigore T. Popa University of Medicine and Pharmacy, Iași, Romania
+  - *Radu Alexandru Vulpoi* [4]
 
 </div>
 
@@ -77,7 +119,7 @@ July 2025
         static fingerprinting.</li>
       <li><strong>Approach</strong>:
         <ul>
-          <li>Trace execution using <strong>Intel PIN DBI</strong></li>
+          <li>Trace execution using <strong>Intel PIN <abbr title="dynamic binary instrumentation">DBI</abbr></strong></li>
           <li>Extract <strong>Partial Control Flow Graphs (PFGs)</strong></li>
           <li>Convert traces to time series</li>
         </ul>
@@ -102,31 +144,7 @@ July 2025
 
 ---
 
-### DBI and Feature Extraction
-
-- Custom Intel **PIN tool** developed for execution tracing
-- From raw execution traces to **Partial Control Flow Graphs (PFGs)**
-- Behaviour encoded as structured time series data
-
---
-
-![](assets/images/proctracer-snapshot.png)
-
---
-
-![](assets/images/flow.png)
-
----
-
-### Dataset & Normalization
-
-- DFS traversals of PFG using queue
-- Queue size values yield on each node visit
-- Normalization PFG traversals lengths 500 with Haar Wavele
-
-<img src="assets/images/cfg-initial-datasets.png" alt="cfg-initial-datasets.png" width="60%" />
-
---
+### Dataset
 
 - 641 sample (115 GB)
 - 6 families of ransomware
@@ -142,9 +160,53 @@ July 2025
 
 ---
 
+### Methodology & Flow
+
+<div
+  style="display: flex; justify-content: space-between; gap: 10px; text-align: center;"
+  id="about-paper-cfg">
+
+  ![](assets/images/flow.png)
+
+
+  <div style="flex: 1; display: flex;  align-items: center; min-width: 30vw;">
+
+  * **DBI**(Dynamic Bynary Instrumentation) trace extraction
+  * **PFG**(Partial Flow Control) constructions
+  * Feature Extraction
+  * Clustering with k-Means
+  * Classification with CNN-LSTM
+
+  <div>
+
+</div>
+
+---
+
+### DBI Trace Extraction
+
+- Custom Intel **PIN tool** developed for execution tracing
+- From raw execution traces to **Partial Control Flow Graphs (PFGs)**
+- Behaviour encoded as structured time series data
+
+![](assets/images/proctracer-snapshot.png)
+
+--
+
+### Feature Extraction
+
+- DFS traversals of PFG using queue
+- Queue size values yield on each node visit
+- Normalization PFG traversals lengths 500 with Haar Wavelet
+
+![](assets/images/cfg-initial-datasets.png)
+
+---
+
 ### Malware Clustering with k-Means
 
-- Time series clustered using DTW Barycenter Averaging
+- Time series clustered using DBA
+  - DynamicTimeWarping Barycenter Averaging
 - 6 clusters discovered, aligned with AV families
 - Good separation observed
 
@@ -220,9 +282,22 @@ July 2025
 
 ### Zebrafish Tracking and Biomedical Relevance
 
-- Zebrafish as biomedical models
-- Automated behavioural analysis necessity
-- Limitations of existing commercial and open-source solutions
+<div
+  style="display: flex; justify-content: space-between; gap: 10px; text-align: center;"
+  id="about-paper-cfg">
+
+  ![](assets/images/zebra-vs-human-brain.png)
+
+
+  <div style="flex: 1; display: flex;  align-items: center;">
+
+  - Zebrafish as biomedical models
+  - Automated behavioural analysis necessity
+  - Limitations of existing commercial and open-source solutions
+
+  <div>
+
+</div>
 
 --
 
@@ -231,7 +306,7 @@ July 2025
 - Two main datasets collected:
   - **Zebrafish trials**: 95 video samples
   - **Goldfish trials**: 80 video samples
-- Each trial consists of ~30–60 seconds of 3D movement
+- Each trial consists of ~4–5 minutes of 3D movement
 - Unknown subjects: Healthy vs Sick vs Treated
 
 ---
@@ -288,9 +363,36 @@ July 2025
 
 ---
 
-### Farm: 3D motion data
+### 3D motion data
 
-<img src="assets/images/cubes-segmentation.png" alt="cubes-segmentation.png" width="60%" />
+![](assets/images/farm-sample-3d.png)
+
+--
+
+### 3D motion pipeline
+
+![](assets/images/farm-3d-pipeline.png)
+
+--
+
+### 3d cube segementation & features
+
+<div
+  style="display: flex; justify-content: space-between; gap: 10px; text-align: center;"
+  id="about-paper-cfg">
+
+  <img src="assets/images/cubes-segmentation.png" alt="cubes-segmentation.png" width="40%" />
+
+
+  <div style="flex: 1; display: flex;  align-items: center;">
+
+  * 7 segments
+  * 48 features 
+    * resampled to 20 using Scaler Mean Variance
+
+  <div>
+
+</div>
 
 --
 
@@ -385,6 +487,35 @@ July 2025
 - Highest accuracy on multi-class colonoscopy dataset
 - Practical insights for model deployment
 
+--
+
+<div style="font-size:0.8em; line-height: 0.7em;">
+
+| ID | Model Name                    | F1     | Small | Pretrained | ViT | Vendor    |
+|----|-------------------------------|--------|-------|------------|-----|-----------|
+| 10 | tiny_vit_5m_224               | 0.3328 | ✓     | ✓          | ✓   | Microsoft |
+| 14 | vitamin_small_224             | 0.3315 | ✓     | ✓          | ✓   | Google    |
+| 9  | vit_relpos_small_patch16_224  | 0.3306 | ✓     | ✓          | ✓   | Google    |
+| 13 | vitamin_base_224              | 0.3301 | ✗     | ✓          | ✓   | Google    |
+| 3  | deit_tiny_patch16_224         | 0.3300 | ✓     | ✓          | ✓   | Facebook  |
+| 1  | maxvit_base_tf_224            | 0.3297 | ✗     | ✓          | ✓   | Google    |
+| 2  | maxvit_tiny_tf_224            | 0.3276 | ✓     | ✓          | ✓   | Google    |
+| 6  | vit_base_resnet26d_224        | 0.3005 | ✗     | ✗          | ✓   | timm      |
+| 5  | vit_base_mci_224              | 0.3247 | ✗     | ✓          | ✓   | Facebook  |
+| 12 | vit_tiny_patch16_224          | 0.2464 | ✓     | ✓          | ✓   | Google    |
+| 11 | vit_small_resnet50d_s16_224   | 0.4556 | ✗     | ✗          | ✓   | timm      |
+| 17 | convnext_base                 | 0.2400 | ✗     | ✓          | ✗   | Facebook  |
+| 4  | swin_tiny_patch4_window7_224  | 0.3321 | ✓     | ✓          | ✗   | Microsoft |
+| 16 | convit_base                   | 0.3297 | ✗     | ✓          | ✓   | Facebook  |
+| 8  | vit_relpos_base_patch16_224   | 0.2432 | ✗     | ✓          | ✓   | Google    |
+| 18 | mobilevit_s                   | 0.3228 | ✓     | ✓          | ✗   | Apple     |
+| 19 | efficientformer_l1            | 0.3200 | ✓     | ✓          | ✗   | Apple     |
+| 15 | samvit_base_patch16_224       | 0.3755 | ✗     | ✗          | ✓   | Meta      |
+| 7  | vit_medium_patch16_clip_224   | 0.2366 | ✗     | ✓          | ✓   | OpenAI    |
+| 20 | vitamin_small_224 (duplicate) | 0.3315 | ✓     | ✓          | ✓   | Google    |
+
+</div>
+
 ---
 
 ### Cross-Domain Analysis and Generalization
@@ -412,16 +543,6 @@ July 2025
 - FARM enhancements: broader species and behaviors
 - Fine-tuning ViTs and multimodal approaches
 - Explainability and interpretability in ML models
-
---
-
-Acknowledgements
-
-- Faculty of Computer Science, Alexandru Ioan Cuza University
-
-- Institute of Computer Science, Romanian Academy, Iași Branch
-
-- Center of Biomedical Research, Romanian Academy, Iași Branch
 
 ---
 
