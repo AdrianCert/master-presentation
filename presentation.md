@@ -1,4 +1,4 @@
-### **Decoding Behavioural Patterns**
+## **Decoding Behavioural Patterns**
 
 **ML Across Temporal & Visual Domains**
 
@@ -8,7 +8,9 @@
 
 _Assistant Dr. Vlad Constantin Crăciun_
 
-Master's Thesis - July 2025
+Master's Thesis
+
+July 2025
 
 ---
 
