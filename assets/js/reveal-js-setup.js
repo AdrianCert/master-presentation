@@ -10,6 +10,6 @@ Reveal.initialize({
     themesPath: "https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/",
   },
   qrcode: {
-    //size: '5hw'
+    size: 125,
   },
 });

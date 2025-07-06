@@ -14,26 +14,91 @@ July 2025
 
 ---
 
-### Motivation and Overview
+## Contributions
 
-- Initial goal: _Create framework for universal binary unpacking_
-  - why? to help researchers to understand malware better
+<div style="display: flex; justify-content: space-between; gap: 10px; text-align: center;">
+
+  <div style="flex: 1;">
+    <a href="#about-paper-farm">
+      <img src="assets/images/paper-farm-2d.png" style="height: 33vh; border-radius: 6px;" />
+      <div style="font-size:0.8em; line-height: 1em;">Improving Automated Behaviour Analysis in Zebrafish Laboratory Trials</div>
+    </a>
+  </div>
+
+  <div style="flex: 1;">
+    <a href="#about-paper-farm">
+      <img src="assets/images/paper-farm-3d.png" style="height: 33vh; border-radius: 6px;" />
+      <div>
+      <div style="font-size:0.8em; line-height: 1em;">Clustering 3D Tracking in Zebrafish Laboratory Trials</div>
+      </div>
+    </a>
+  </div>
+
+  <div style="flex: 1;">
+    <a href="#about-paper-cfg">
+      <img src="assets/images/paper-cfg-dbi.png" style="height: 33vh; border-radius: 6px;" />
+      <div style="font-size:0.8em; line-height: 1em;">DBI-Assisted Behaviour Classification of Malicious Binary Applications</div>
+    </a>
+  </div>
+
+  <div style="flex: 1;">
+    <a href="#about-paper-vit">
+      <img src="assets/images/paper-vit.png" style="height: 33vh; border-radius: 6px;" />
+      <div style="font-size:0.8em; line-height: 1em;">Comparing Vision Transformers Towards Automatic Bowel  Cleansing: A discussion</div>
+    </a>
+  </div>
+
+</div>
+
+---
+
+### Motivation and How I started
+
+- Initial goal: _Create an universal binary unpacking framework_
+  - why? to help security researchers
 - Phase01: **Behavioural analysis** as key for cybersecurity and biomedical research
-
---
-
-### Shift: static to dynamic analysis
-
 - Shift from static approaches towards dynamic runtime analysis
 - Goal: Create generalized behavioural models for diverse domains
 
 ---
 
-### Malware Behaviour Profiling
+### DBI-Assisted Behaviour Classification
 
-- Challenges in static malware analysis
-- Why behavioural (dynamic) approaches matter
-- Dynamic Binary Instrumentation (**DBI**) as a solution
+<div
+  style="display: flex; justify-content: space-between; gap: 10px; text-align: center;"
+  id="about-paper-cfg">
+
+  <img src="assets/images/paper-cfg-dbi.png"
+    style="height: 33vh; border-radius: 6px;" />
+
+  <div style="flex: 1; display: flex;  align-items: center;">
+    <ul style="text-align: left; font-size: 1em;">
+      <li><strong>Goal</strong>: Detect malware via runtime behaviour, avoiding
+        static fingerprinting.</li>
+      <li><strong>Approach</strong>:
+        <ul>
+          <li>Trace execution using <strong>Intel PIN DBI</strong></li>
+          <li>Extract <strong>Partial Control Flow Graphs (PFGs)</strong></li>
+          <li>Convert traces to time series</li>
+        </ul>
+      </li>
+      <li><strong>ML Pipeline</strong>:
+        <ul>
+          <li><strong>k-Means + DTW</strong> for family clustering</li>
+          <li><strong>CNN-LSTM</strong> for supervised classification</li>
+        </ul>
+      </li>
+      <li><strong>Results</strong>:
+        <ul>
+          <li>Identified 6 malware families</li>
+          <li><strong>99.83%</strong> test accuracy</li>
+        </ul>
+      </li>
+      <li><strong>Impact</strong>: Resilient to obfuscation; enables behavioural
+        profiling</li>
+    </ul>
+  </div>
+</div>
 
 ---
 
@@ -110,6 +175,46 @@ July 2025
 - Deep learning model: hybrid CNN-LSTM architecture
 - Classification accuracy: **99.83%**
 - High performance even in large-scale datasets (135k samples)
+
+---
+
+### ML-Driven Zebrafish Behaviour Tracking
+
+<div
+  style="display: flex; justify-content: space-between; gap: 5px; text-align: center;"
+  id="about-paper-farm">
+
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 0px;">
+    <img src="assets/images/paper-farm-2d.png" style="height: 25vh; border-radius: 6px;" />
+    <img src="assets/images/paper-farm-3d.png" style="height: 25vh; border-radius: 6px;" />
+  </div>
+
+  <div style="flex: 1; display: flex; align-items: center;">
+    <ul style="text-align: left; font-size: 0.8em;">
+      <li><strong>Goal</strong>: Enable automated analysis of fish behaviour in lab settings</li>
+      <li><strong>Approach</strong>:
+        <ul>
+          <li>Real-time tracking via <strong>FARM system</strong></li>
+          <li>Extract 2D/3D movement features (speed, turns, trajectories)</li>
+          <li>Detect patterns using <strong>K-Means</strong> and <strong>HMM</strong></li>
+        </ul>
+      </li>
+      <li><strong>Experiments</strong>:
+        <ul>
+          <li>Zebrafish (95) and Goldfish (80) trials</li>
+          <li>Unknown subjects: Healthy vs Sick vs Treated</li>
+        </ul>
+      </li>
+      <li><strong>Results</strong>:
+        <ul>
+          <li>Robust multi-dimensional clustering</li>
+          <li>Cross-species generalisation</li>
+        </ul>
+      </li>
+      <li><strong>Impact</strong>: Provides reproducible ML pipeline for behavioural neuroscience</li>
+    </ul>
+  </div>
+</div>
 
 ---
 
@@ -208,6 +313,35 @@ July 2025
   - Precision and recall over 90% on labelled zebrafish data
 - **Cross-species applicability**:
   - Successfully extended from zebrafish to goldfish trials
+
+---
+
+### ViT benchmarking on BBPS clasification
+
+<div
+  style="display: flex; justify-content: space-between; gap: 10px; text-align: center;"
+  id="about-paper-vit">
+
+  <img src="assets/images/paper-vit.png"
+    style="height: 33vh; border-radius: 6px;" />
+
+  <div style="flex: 1; display: flex; align-items: center;">
+    <ul style="text-align: left; font-size: 1em;">
+      <li><strong>Goal</strong>: Benchmark <strong>Vision Transformer (ViT)</strong> models on medical image classification.</li>
+      <li><strong>Use Case</strong>: Frame-level classification of colonoscopy images using <strong>BBPS scale</strong>.</li>
+      <li><strong>Datasets</strong>: CVC-ClinicDB, C3VD</li>
+      <li>20 ViT-based and non-ViT models</li>
+      <li><strong>Hardware</strong>: RTX 4080, A100</li>
+      <li><strong>Best by F1 Score on C3VD</strong>:
+      <ul>
+        <li>0.456 <strong>ViT Small ResNet50d S16 224</strong> (timm): best overall</li>
+        <li>0.376 <strong>SAMViT Base Patch16</strong> (Meta): strong performance without pretraining</li>
+        <li>0.333 <strong>Tiny ViT 5M</strong> (Microsoft): best-performing small pretrained ViT</li>
+      </ul>
+      </li>
+    </ul>
+  </div>
+</div>
 
 ---
 
